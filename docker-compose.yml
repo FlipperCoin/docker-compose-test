@@ -31,3 +31,8 @@ services:
     depends_on: 
       rabbitmq:
         condition: service_healthy
+  consumer:
+    image: flippercoin/consumer:3
+    depends_on: 
+      rabbitmq:
+        condition: service_healthy
