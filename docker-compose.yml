@@ -2,7 +2,7 @@ version: '2.2'
 
 services:
   api:
-    image: flippercoin/flaskapp:5
+    image: flippercoin/flaskapp:6
     expose:
       - "5000"
     depends_on: 
@@ -32,7 +32,9 @@ services:
       rabbitmq:
         condition: service_healthy
   consumer:
-    image: flippercoin/consumer:3
+    image: flippercoin/consumer:4
     depends_on: 
       rabbitmq:
         condition: service_healthy
+      redis:
+        condition: service_started

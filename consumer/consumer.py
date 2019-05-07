@@ -1,4 +1,7 @@
 import pika
+from redis import Redis
+
+redis = Redis(host='redis', port=6379)
 
 def init_rabbit():
     # Connect to rabbit
@@ -28,7 +31,7 @@ def init_rabbit():
     return channel
 
 def on_new_message(ch, method, properties, body):
-    print(body)
+    redis.incrby('data_consumed', len(body))
 
 def main():
     channel = init_rabbit()
